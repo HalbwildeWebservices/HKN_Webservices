@@ -1,7 +1,7 @@
 {
-  "name": "nest-typescript-starter",
+  "name": "hkn-webservices",
   "version": "1.0.0",
-  "description": "Nest TypeScript starter repository",
+  "description": "Webservices for Halbwilde Kajakfahrer Norddeutschland - HKN",
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
