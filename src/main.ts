@@ -1,9 +1,26 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { ServerOptions, createServer } from 'spdy'
+import { readFileSync } from 'fs';
+import { ExpressAdapter } from '@nestjs/platform-express';
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+
+  const express = require('express');
+  const expressApp = express();
+
+  const keyPath = process.env.KEY; 
+  const certPath = process.env.CERT;
+  const spdyOptions : ServerOptions = {
+    key: readFileSync(keyPath),
+    cert: readFileSync(certPath),
+  };
+
+  const server = createServer(spdyOptions, expressApp);
+
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
   const swaggerUserApiConfig = new DocumentBuilder()
     .setTitle('HKN user API')
     .setDescription('The HKN user management REST API')
@@ -13,7 +30,11 @@ async function bootstrap() {
     .build();
   const swaggerUserDoc = SwaggerModule.createDocument(app, swaggerUserApiConfig);
   SwaggerModule.setup('userapi', app, swaggerUserDoc);
-  await app.listen(3000);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  const port = process.env.PORT;
+  await app.init();
+  server.listen(port);
+  server.on('listening', () => console.log(`Application is running on port ${port}`));
 }
+
+
 bootstrap();
