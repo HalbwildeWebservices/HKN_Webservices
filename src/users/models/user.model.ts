@@ -10,7 +10,7 @@ export class User extends Model {
   userId: string;
 
   @ApiProperty({example: 'Manfred Mustermann', description: 'chosen username'})
-  @Unique
+  @Unique('Username already taken')
   @Column
   username: string;
   

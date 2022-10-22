@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { ServerOptions, createServer } from 'spdy'
 import { readFileSync } from 'fs';
 import { ExpressAdapter } from '@nestjs/platform-express';
+import { ValidationPipe } from '@nestjs/common';
 
 
 async function bootstrap() {
@@ -30,6 +31,7 @@ async function bootstrap() {
     .build();
   const swaggerUserDoc = SwaggerModule.createDocument(app, swaggerUserApiConfig);
   SwaggerModule.setup('userapi', app, swaggerUserDoc);
+  app.useGlobalPipes(new ValidationPipe({enableDebugMessages: true}))
   const port = process.env.PORT;
   await app.init();
   server.listen(port);
