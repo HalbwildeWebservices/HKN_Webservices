@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { randomUUID } from 'crypto';
 import { CreateUserDto } from './dto/create-user.dto';
-import { User } from './models/user.model';
+import { User, UserPermission } from './models/user.model';
 import { hash } from 'bcrypt'
 
 @Injectable()
@@ -15,20 +14,21 @@ export class UsersService {
   async create(createUserDto: CreateUserDto): Promise<User> {
     const password = await hash(createUserDto.password, 10);
     return this.userModel.create({
-      userId: randomUUID(),
       firstName: createUserDto.firstName,
       lastName: createUserDto.lastName,
       password,
       username: createUserDto.username,
-    });
+      permissions: [{name: 'default'}],
+    }, {include: [UserPermission]});
   }
 
   async findAll(): Promise<User[]> {
-    return this.userModel.findAll();
+    return this.userModel.findAll({include: [UserPermission]});
   }
 
   findOne(id: string): Promise<User> {
     return this.userModel.findOne({
+      include: [UserPermission],
       where: {
         userId: id,
       },
