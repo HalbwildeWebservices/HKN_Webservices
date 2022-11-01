@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { ContactHKNComponent } from './contact-hkn/contact-hkn.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ContactHKNComponent } from './contact-hkn/contact-hkn.component';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
