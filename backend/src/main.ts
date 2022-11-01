@@ -21,7 +21,7 @@ async function bootstrap() {
 
   const server = createServer(spdyOptions, expressApp);
 
-  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp), {cors: true});
   const swaggerUserApiConfig = new DocumentBuilder()
     .setTitle('HKN user API')
     .setDescription('The HKN user management REST API')
