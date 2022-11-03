@@ -18,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MemberDashboardComponent } from './member-dashboard/member-dashboard.component';
 import { ContactlistComponent } from './contactlist/contactlist.component';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MemberProfileComponent } from './member-profile/member-profile.componen
     ContactHKNComponent,
     MemberDashboardComponent,
     ContactlistComponent,
-    MemberProfileComponent
+    MemberProfileComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
