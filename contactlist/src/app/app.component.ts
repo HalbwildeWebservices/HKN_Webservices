@@ -4,6 +4,7 @@ import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AuthServiceService } from './services/authService/auth-service.service';
 
 @UntilDestroy()
 @Component({

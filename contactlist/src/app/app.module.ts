@@ -15,6 +15,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { ContactHKNComponent } from './contact-hkn/contact-hkn.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MemberDashboardComponent } from './member-dashboard/member-dashboard.component';
+import { ContactlistComponent } from './contactlist/contactlist.component';
+import { MemberProfileComponent } from './member-profile/member-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     AboutUsComponent,
     SignInComponent,
-    ContactHKNComponent
+    ContactHKNComponent,
+    MemberDashboardComponent,
+    ContactlistComponent,
+    MemberProfileComponent
   ],
   imports: [
     BrowserModule,

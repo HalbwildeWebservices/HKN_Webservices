@@ -1,14 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap, shareReplay } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-
-  constructor(private http: HttpClient) { }
+  private jwtHelper: JwtHelperService;
+  constructor(private http: HttpClient) {
+    this.jwtHelper = new JwtHelperService();
+   }
 
   public login(username: string, password: string ) {
     return this.http.post<{[key: string]: string}>('https://localhost:3000/auth/login', {username, password})
@@ -31,10 +34,10 @@ public logout() {
 
 public isLoggedIn() {
     const token = localStorage.getItem('access_token');
-    if (token === null) {
+    if (!token) {
         return false;
     } else {
-        return true;
+        return !this.jwtHelper.isTokenExpired(token);
     }
 }
 
