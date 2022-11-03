@@ -13,12 +13,12 @@
     <span>Contact Us</span>
   </button>
 
-  <button mat-button class="menu-button" routerLink="/sign-in">
+  <button mat-button class="menu-button" routerLink="/sign-in" *ngIf="!this.authService.isLoggedIn()">
     <mat-icon>lock_open</mat-icon>
     <span>Sign in</span>
   </button>
 
-  <button mat-button class="menu-button" routerLink="/dashboard">
+  <button mat-button class="menu-button" routerLink="/dashboard" *ngIf="this.authService.isLoggedIn()">
     <mat-icon>dashboard</mat-icon>
     <span>Dashboard</span>
   </button>
