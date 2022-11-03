@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
     const password = this.loginForm.value.password ?? '';
     this.authService
       .login(username, password)
-      .subscribe((res) => alert(res))
+      .subscribe({next: (res) => alert(res['access_token']), error: (err) => alert(JSON.stringify(err))})
   }
 
 }
