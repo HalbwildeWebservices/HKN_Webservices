@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from '../services/userService/user.service';
 
 @Component({
   selector: 'app-contactlist',
@@ -8,9 +10,22 @@ import { Router } from '@angular/router';
 })
 export class ContactlistComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  public users: {[key: string]: string}[] = [];
+
+  constructor(public router: Router, private userService: UserService) { 
+
+  }
+
 
   ngOnInit(): void {
+    this.getUsers()
+  }
+
+  public getUsers() {
+    return this.userService.getUsers().subscribe((res) => {
+      console.log(res);
+      this.users = res;
+    });
   }
 
 }

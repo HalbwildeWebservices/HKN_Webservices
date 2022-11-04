@@ -19,6 +19,7 @@ import { MemberDashboardComponent } from './member-dashboard/member-dashboard.co
 import { ContactlistComponent } from './contactlist/contactlist.component';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
