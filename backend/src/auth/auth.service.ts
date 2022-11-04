@@ -2,17 +2,17 @@ import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcrypt';
-import { readFileSync } from 'fs';
+//import { readFileSync } from 'fs';
 
 @Injectable()
 export class AuthService {
-  private readonly privateKey: Buffer;
+  //private readonly privateKey: Buffer;
   constructor(
     private readonly usersService: UsersService,
     private readonly jwtService: JwtService,
   ) {
-    const privateKeyPath = process.env.TOKENKEY;
-    this.privateKey = readFileSync(privateKeyPath);
+    //const privateKeyPath = process.env.TOKENKEY;
+    //this.privateKey = readFileSync(privateKeyPath);
   }
 
 
@@ -31,7 +31,7 @@ export class AuthService {
   async login(user: any) {
     const payload = { username: user.username, sub: user.userId };
     return {
-      access_token: this.jwtService.sign(payload, { privateKey: this.privateKey }),
+      access_token: this.jwtService.sign(payload, { secret: process.env.TOKENKEY}),
     };
   }
 }
