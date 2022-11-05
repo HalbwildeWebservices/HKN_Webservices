@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -10,6 +10,7 @@ export class CreateUserComponent implements OnInit {
 
   nameFormGroup: FormGroup;
   addressFormGroup: FormGroup;
+  reachabilityFormGroup: FormGroup<{email: FormControl, phoneNumbers: FormArray<FormGroup<{number: FormControl, description: FormControl}>>}>;
   userFormGroup: FormGroup;
   privacyAndTermsGroup: FormGroup;
 
@@ -25,8 +26,11 @@ export class CreateUserComponent implements OnInit {
       town: ['', Validators.required],
       country: ['', Validators.required],
     });
-    this.userFormGroup = this.formBuilder.group({
+    this.reachabilityFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
+      phoneNumbers: this.formBuilder.array<FormGroup>([])
+    });
+    this.userFormGroup = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       password: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(30)]]
     });
@@ -38,6 +42,22 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit() {
     
+  }
+
+  get phoneNumbers() {
+    return this.reachabilityFormGroup.controls.phoneNumbers;
+  }
+
+  public addPhone() {
+    const phoneForm = this.formBuilder.group({
+      number: ['', [Validators.required, Validators.pattern(/^\+[\d]+$/)]],
+      description: ['', [Validators.required]],
+    });
+    this.phoneNumbers.push(phoneForm);
+  }
+
+  public deletePhone(phoneIdx: number) {
+    this.phoneNumbers.removeAt(phoneIdx);
   }
 
   public submit() {
