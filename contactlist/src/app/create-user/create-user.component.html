@@ -1,0 +1,71 @@
+  <mat-vertical-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="nameFormGroup">
+      <form [formGroup]="nameFormGroup">
+        <ng-template matStepLabel>Name</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="first name" formControlName="firstName" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="last name" formControlName="lastName" required>
+          </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="addressFormGroup">
+      <form [formGroup]="addressFormGroup">
+        <ng-template matStepLabel>Address</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="street" formControlName="street" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="number" formControlName="streetNumber" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="zip code"formControlName="zipCode" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="town" formControlName="town" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="country" formControlName="country" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="userFormGroup">
+        <form [formGroup]="userFormGroup">
+          <ng-template matStepLabel>User info</ng-template>
+          <mat-form-field>
+            <input matInput formControlName="email" required>
+            <mat-hint>valid email address</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput formControlName="username" required>
+              <mat-hint>min 6 / max 15 characters</mat-hint>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput formControlName="password" required>
+              <mat-hint>min 15 / max 30 characters</mat-hint>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>Input complete</p>
+      <div>
+        <button mat-button (click)="submit()">Submit</button>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  

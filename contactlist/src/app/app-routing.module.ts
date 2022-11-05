@@ -8,6 +8,7 @@ import { MemberDashboardComponent } from './member-dashboard/member-dashboard.co
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { ContactlistComponent } from './contactlist/contactlist.component';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,11 @@ const routes: Routes = [
   {
     path: 'profile',
     component: MemberProfileComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'createUser',
+    component: CreateUserComponent,
     canActivate: [AuthGuardService],
   }
 ];

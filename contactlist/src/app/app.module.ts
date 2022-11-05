@@ -11,6 +11,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { ContactHKNComponent } from './contact-hkn/contact-hkn.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,6 +23,7 @@ import { ContactlistComponent } from './contactlist/contactlist.component';
 import { MemberProfileComponent } from './member-profile/member-profile.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { CreateUserComponent } from './create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { httpInterceptorProviders } from './http-interceptors';
     MemberDashboardComponent,
     ContactlistComponent,
     MemberProfileComponent,
-    SidenavComponent
+    SidenavComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +49,9 @@ import { httpInterceptorProviders } from './http-interceptors';
     MatDividerModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
