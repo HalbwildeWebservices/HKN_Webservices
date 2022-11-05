@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/authService/auth-service.service';
 
 @Component({
@@ -10,13 +11,14 @@ import { AuthServiceService } from '../services/authService/auth-service.service
 export class SignInComponent implements OnInit {
 
   loginForm = this.formBuilder.group({
-    username: '',
-    password: '',
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthServiceService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +29,9 @@ export class SignInComponent implements OnInit {
     const password = this.loginForm.value.password ?? '';
     this.authService
       .login(username, password)
-      .subscribe({next: (res) => alert(res['access_token']), error: (err) => alert(JSON.stringify(err))})
+      .subscribe({
+        next: (_res) => this.router.navigate(['/dashboard']), 
+        error: (err) => alert(JSON.stringify(err))})
   }
 
 }
