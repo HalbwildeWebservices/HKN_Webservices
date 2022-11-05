@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDividerModule } from '@angular/material/divider';
 import { ContactHKNComponent } from './contact-hkn/contact-hkn.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -52,6 +53,7 @@ import { CreateUserComponent } from './create-user/create-user.component';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
+    MatCheckboxModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

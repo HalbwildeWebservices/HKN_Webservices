@@ -11,6 +11,7 @@ export class CreateUserComponent implements OnInit {
   nameFormGroup: FormGroup;
   addressFormGroup: FormGroup;
   userFormGroup: FormGroup;
+  privacyAndTermsGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
     this.nameFormGroup = this.formBuilder.group({
@@ -28,6 +29,10 @@ export class CreateUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       username: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       password: ['', [Validators.required, Validators.minLength(15), Validators.maxLength(30)]]
+    });
+    this.privacyAndTermsGroup = this.formBuilder.group({
+      termsAccepted: [false, Validators.requiredTrue],
+      privacyAccepted: [false, Validators.requiredTrue],
     });
   }
 

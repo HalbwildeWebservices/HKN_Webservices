@@ -58,6 +58,19 @@
           </div>
         </form>
     </mat-step>
+    <mat-step [stepControl]="privacyAndTermsGroup">
+        <form [formGroup]="privacyAndTermsGroup">
+          <ng-template matStepLabel>Privacy and Terms of Use</ng-template>
+          <div>
+            <mat-checkbox formControlName="termsAccepted" required>accept terms and conditions</mat-checkbox> 
+            <mat-checkbox formControlName="privacyAccepted" required>accept privacy statement</mat-checkbox>
+          </div>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+    </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
       <p>Input complete</p>
