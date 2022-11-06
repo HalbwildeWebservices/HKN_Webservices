@@ -21,7 +21,7 @@ export class CreateUserComponent implements OnInit {
     });
     this.addressFormGroup = this.formBuilder.group({
       street: ['', Validators.required],
-      streetNumber: ['', Validators.required],
+      houseNumber: ['', Validators.required],
       zipCode: ['', Validators.required],
       town: ['', Validators.required],
       country: ['', Validators.required],
@@ -61,7 +61,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   public submit() {
-    console.log('submit')
+    console.log(this.nameFormGroup.value, this.addressFormGroup.value, this.reachabilityFormGroup.value)
   }
 
 }
