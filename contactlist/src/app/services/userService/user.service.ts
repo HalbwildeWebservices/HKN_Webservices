@@ -12,5 +12,9 @@ export class UserService {
     return this.http.get<{[key: string]: string}[]>('https://localhost:3000/users')
   }
 
+  public addUser(user: {[key: string]: any}) {
+    return this.http.post('https://localhost:3000/users', user);
+  }
+
 
 }

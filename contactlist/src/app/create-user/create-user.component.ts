@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../services/userService/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -14,7 +15,7 @@ export class CreateUserComponent implements OnInit {
   userFormGroup: FormGroup;
   privacyAndTermsGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private userService: UserService) {
     this.nameFormGroup = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -61,7 +62,15 @@ export class CreateUserComponent implements OnInit {
   }
 
   public submit() {
-    console.log(this.nameFormGroup.value, this.addressFormGroup.value, this.reachabilityFormGroup.value)
+    const user = {
+      ...this.userFormGroup.value,
+      ...this.nameFormGroup.value,
+      address: {...this.addressFormGroup.value},
+      ...this.reachabilityFormGroup.value,
+    }
+    console.log(user);
+    this.userService.addUser(user)
+      .subscribe({next: (res) => console.log(res), error: (err) => console.log(err)})
   }
 
 }
