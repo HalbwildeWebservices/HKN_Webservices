@@ -15,7 +15,9 @@ export class UsersController {
   @Post()
   //@UseGuards(JwtAuthGuard)
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto).catch((err) => {console.error(err); return err.message});
+    return this.usersService
+      .create(createUserDto)
+      .catch((err) => {console.error(err); return err.errors.map((e) => e.message).join(", ")});
   }
 
   @UseGuards(JwtAuthGuard)

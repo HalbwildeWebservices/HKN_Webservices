@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserPermission } from './models/user.model';
 import { hash } from 'bcrypt'
 import { PatchUserDto } from './dto/patch-user.dto';
+import { Address } from './models/address.model';
 
 @Injectable()
 export class UsersService {
@@ -21,7 +22,8 @@ export class UsersService {
       username: createUserDto.username,
       email: createUserDto.email,
       permissions: [{name: 'default'}],
-    }, {include: [UserPermission]});
+      address: createUserDto.address,
+    }, {include: [UserPermission, Address]});
   }
 
   async findAll(): Promise<User[]> {
