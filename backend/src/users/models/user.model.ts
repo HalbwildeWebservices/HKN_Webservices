@@ -28,6 +28,9 @@ export class User extends Model {
   @Column
   password: string;
 
+  @Column
+  email: string;
+
   @HasMany(() => UserPermission)
   permissions: UserPermission[];
 }

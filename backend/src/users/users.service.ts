@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User, UserPermission } from './models/user.model';
 import { hash } from 'bcrypt'
+import { PatchUserDto } from './dto/patch-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -18,6 +19,7 @@ export class UsersService {
       lastName: createUserDto.lastName,
       password,
       username: createUserDto.username,
+      email: createUserDto.email,
       permissions: [{name: 'default'}],
     }, {include: [UserPermission]});
   }
@@ -46,5 +48,13 @@ export class UsersService {
   async remove(id: string): Promise<void> {
     const user = await this.findOne(id);
     await user.destroy();
+  }
+
+  async updateUser(id: string, patchUserDto: PatchUserDto): Promise<number[]> {
+    return this.userModel.update(patchUserDto, {
+      where: {
+        userId: id,
+      }
+    })
   }
 }

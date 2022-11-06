@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
+import { PatchUserDto } from './dto/patch-user.dto';
 import { User } from './models/user.model';
 import { UsersService } from './users.service';
 
@@ -33,6 +34,11 @@ export class UsersController {
   @Get(':id')
   findOne(@Param('id') id: string): Promise<User> {
     return this.usersService.findOne(id);
+  }
+
+  @Patch(':id')
+  updateUser(@Param('id') id: string, @Body() patchUserDto: PatchUserDto): Promise<number[]> {
+    return this.usersService.updateUser(id, patchUserDto);
   }
 
   @UseGuards(JwtAuthGuard)
